@@ -1,0 +1,15 @@
+
+<div class="pages">
+    <div class="pagination">
+        <button class="btn btn-small btn-info" (click)="onPrev()"  [disabled]="page==1||loading">Previous</button>
+    
+        <button class="btn btn-small btn-info btn-pageNumber" *ngFor="let pageNumber of getPages()" 
+        (click)="onPage(pageNumber)"
+        [ngClass]="{'active':pageNumber===page,'disabled':loading}">{{pageNumber}}</button>
+    
+        <button class="btn btn-small btn-info" (click)="onNext()" [disabled]="isLastPage()||loading">On Next</button>
+    </div>
+       
+    
+    
+    </div>
