@@ -46,6 +46,7 @@ export class ShowPokemonsComponent implements OnInit {
    this.pokemonService.types=types.results;
     });
   }
+  
   getPokemon(){
     console.log("ttt")
   }
