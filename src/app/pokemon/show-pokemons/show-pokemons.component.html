@@ -1,0 +1,45 @@
+<nav>
+    <h1>Pokedex Pokemons</h1>
+</nav>
+<div class="search-container">
+    <div class="row col-md-12 input-group">
+        <div class="col-md-3">
+            <label style="float:right;">Search By:</label>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-10">
+                <select id="pokemonType" type="text" name="type" class="form-control" (click)="getPokemon()">
+                    <option value="">Pokemon Type</option>
+                    <option *ngFor="let ds of pokemonService.types" [value]="ds.name" >
+                        {{ds.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pokemon Grid-->
+<div class="pokemon-grid">
+
+    <div class="box" *ngFor="let pokemon of pokemonService.pokemons">
+        <img [src]="pokemon.sprites[0].frontImage" alt="Pokemon">
+        <h3>{{pokemon.name}}</h3>
+        <p>
+            <b>Type: </b>{{pokemon.types[0].name}}
+        </p>
+        <p>
+            <b>Height: </b>{{pokemon.height}}
+        </p>
+        <p>
+            <b>Health: </b>{{pokemon.stats[0].health}}
+        </p>
+        <p>
+            <b>Attack Power: </b>{{pokemon.stats[0].attackPower}}
+        </p>
+    </div>
+</div>
+<!-- End of Pokemon Grid-->
+<!-- Pagination-->
+<app-pagination (goPrev)="goToPrevious()" (goNext)="goToNext()" (goPage)="goToPage($event)" [page]="page"
+    [perPage]="pageSize" [count]="totalRecords">
+</app-pagination>
+<!--End of Pagination-->

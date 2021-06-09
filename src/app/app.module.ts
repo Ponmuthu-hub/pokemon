@@ -1,18 +1,35 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
-
+import{NgxWebstorageModule} from 'ngx-webstorage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ErrorResponseService } from './error-response/error-response.service';
+import { ErrorResponseComponent } from './error-response/error-response/error-response.component';
+import { AuthheaderInterceptor } from './http-interceptors';
+import { PaginationModule } from './pagination/pagination.module';
+import { PokemonModule } from './pokemon/pokemon.module';
+import { SharedService } from './shared.service';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ErrorResponseComponent,
+    
+   
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    NgxWebstorageModule.forRoot(),
+    PokemonModule,
+    HttpClientModule,
+    PaginationModule
   ],
-  providers: [],
+  providers: [NgxWebstorageModule,ErrorResponseService,SharedService,{provide:HTTP_INTERCEPTORS,useClass:AuthheaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

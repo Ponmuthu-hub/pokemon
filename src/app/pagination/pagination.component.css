@@ -1,0 +1,16 @@
+.pagination{
+
+    left: 50%;
+    transform: translate3d(-50%,-50%, 0);
+    position: absolute;
+    padding-top: 20px;
+}
+.pages{
+    padding: 14px;
+    display: block;
+}
+.btn-pageNumber{
+    min-height: 40px;
+    min-width: 14px;
+    margin: 2px;
+}
