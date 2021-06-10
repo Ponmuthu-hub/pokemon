@@ -15,7 +15,7 @@ stats:Stat[]=[];
 sprit:Sprite=<Sprite>{};
   constructor(private sharedService:SharedService) { }
 
-  getPokemons(pageSize:number,offSet:number){
+  getAllPokemons(pageSize:number,offSet:number){
     return this.sharedService.Get('pokemon?limit='+pageSize+'&offset='+offSet);
   }
   getPokemonData(name:string){
@@ -23,5 +23,8 @@ sprit:Sprite=<Sprite>{};
   }
   getPokemonTypes(){
     return this.sharedService.Get('type')
+  }
+  getPokemons(typeName:string){
+    return this.sharedService.Get('type/'+typeName)
   }
 }

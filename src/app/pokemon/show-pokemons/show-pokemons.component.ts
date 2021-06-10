@@ -14,31 +14,46 @@ export class ShowPokemonsComponent implements OnInit {
   pageSize: number = 8;
   loading: any = false;
   pokeData: any[] = [];
+  pokemonNames:any[]=[];
   pokemonTypeName:any;
   constructor(public pokemonService: PokemonService, private paginationComponent: PaginationComponent) { }
 
   ngOnInit(): void {
     this.refreshPokemons();
     this.dropDownPokemonTypes();
+    this.getPokemonData();
   }
-  refreshPokemons() {
-    this.pokemonService.getPokemons(this.pageSize, (this.page - 1) * this.pageSize).subscribe((response: any) => {
+  refreshPokemons(){
+    var pokemonTypeName=(<HTMLInputElement>document.getElementById("pokemonType")).value;
+    if(pokemonTypeName==''){
+this.getAllPokemons();
+    }
+    else{
+    this.searchType();}
+  }
+  getAllPokemons() {
+    this.pokemonService.getAllPokemons(this.pageSize, (this.page - 1) * this.pageSize).subscribe((response: any) => {
       this.totalRecords = response.count;
-      this.pokemonService.pokemons = [];
-      response.results.forEach((result: any) => {
-        this.pokemonService.getPokemonData(result.name).subscribe((uniqResponse: any) => {
-          this.pokemonService.pokemon = <Pokemon>{
-            name: uniqResponse.name,
-            height: uniqResponse.height,
-            types: [{ name: uniqResponse.types[0].type.name }],
-            stats: [{ health: uniqResponse.stats[0].base_stat, attackPower: uniqResponse.stats[1].base_stat }],
-            sprites: [{ frontImage: uniqResponse.sprites.front_default }]
-          };
-          this.pokemonService.pokemons.push(this.pokemonService.pokemon);
-        })
-
-      });
+      this.pokemonNames=[];
+      this.pokemonNames=response.results;
+      this.getPokemonData();
     });
+  }
+  getPokemonData(){
+    console.log(this.pokemonNames)
+    this.pokemonNames.forEach((result: any) => {
+      this.pokemonService.pokemons = [];
+      this.pokemonService.getPokemonData(result.name).subscribe((uniqResponse: any) => {
+        this.pokemonService.pokemon = <Pokemon>{
+          name: uniqResponse.name,
+          height: uniqResponse.height,
+          types: [{ name: uniqResponse.types[0].type.name }],
+          stats: [{ health: uniqResponse.stats[0].base_stat, attackPower: uniqResponse.stats[1].base_stat }],
+          sprites: [{ frontImage: uniqResponse.sprites.front_default }]
+        };
+        this.pokemonService.pokemons.push(this.pokemonService.pokemon);
+      })
+ });
 
   }
   dropDownPokemonTypes(){
@@ -47,9 +62,23 @@ export class ShowPokemonsComponent implements OnInit {
     });
   }
   
-  getPokemon(){
-    console.log("ttt")
+  searchType(){
+    console.log((this.page-1)*this.pageSize-1,"",(this.pageSize*this.page));
+    var pokemonTypeName=(<HTMLInputElement>document.getElementById("pokemonType")).value;
+    if(pokemonTypeName!=''){
+    this.pokemonService.getPokemons(pokemonTypeName).subscribe((response: any) => {
+      var typeDetails=response;
+      this.totalRecords=typeDetails.pokemon.length;
+      this.pokemonNames=[];
+      for(let i=(this.page-1)*this.pageSize;i<(this.pageSize*this.page);i++){
+        console.log(typeDetails.pokemon[i].pokemon.name)
+          this.pokemonNames.push(<any>{name:response.pokemon[i].pokemon.name})
+      }
+      this.getPokemonData();
+    });
   }
+  }
+ 
   goToPrevious() {
     this.page--;
     this.refreshPokemons();

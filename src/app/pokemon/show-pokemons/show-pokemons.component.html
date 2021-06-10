@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-3">
             <div class="col-md-10">
-                <select id="pokemonType" type="text" name="type" class="form-control" (click)="getPokemon()">
+                <select id="pokemonType" type="text" name="type" class="form-control" (click)="searchType()">
                     <option value="">Pokemon Type</option>
                     <option *ngFor="let ds of pokemonService.types" [value]="ds.name" >
                         {{ds.name}}</option>
