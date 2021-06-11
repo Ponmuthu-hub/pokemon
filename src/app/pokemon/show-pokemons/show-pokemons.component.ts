@@ -16,6 +16,7 @@ export class ShowPokemonsComponent implements OnInit {
   pokeData: any[] = [];
   pokemonNames:any[]=[];
   pokemonTypeName:any;
+  pokemonName:any;
   constructor(public pokemonService: PokemonService, private paginationComponent: PaginationComponent) { }
 
   ngOnInit(): void {
@@ -40,7 +41,6 @@ this.getAllPokemons();
     });
   }
   getPokemonData(){
-    console.log(this.pokemonNames)
     this.pokemonNames.forEach((result: any) => {
       this.pokemonService.pokemons = [];
       this.pokemonService.getPokemonData(result.name).subscribe((uniqResponse: any) => {
@@ -77,6 +77,17 @@ this.getAllPokemons();
       this.getPokemonData();
     });
   }
+  }
+  searchPokemon(searchName:any){
+    if(searchName!=''){
+    this.pokemonNames=[];
+this.pokemonNames.push(<any>{name:searchName})
+this.totalRecords=1;
+this.getPokemonData();
+}
+else{
+  this.refreshPokemons();
+}
   }
  
   goToPrevious() {

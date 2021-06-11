@@ -4,7 +4,7 @@
 <div class="search-container">
     <div class="row col-md-12 input-group">
         <div class="col-md-3">
-            <label style="float:right;">Search By:</label>
+            <input type="submit" (click)="refreshPokemons" class="btn btn-primary" value="All Pokemons">
         </div>
         <div class="col-md-3">
             <div class="col-md-10">
@@ -15,6 +15,12 @@
                 </select>
             </div>
         </div>
+        <div class="col-md-3">
+        <div style="padding: left=30px;" class="col-md-10 input-group">
+           <input type="text" [(ngModel)]="pokemonName" class="form-control"  placeholder="Pokemon Id or Name">
+           <input type="submit" (click)="searchPokemon(pokemonName)" class="btn btn-primary" value="Search">
+        </div>
+    </div>
     </div>
 </div>
 <!-- Pokemon Grid-->
