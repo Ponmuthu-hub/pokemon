@@ -4,7 +4,7 @@
 <div class="search-container">
     <div class="row col-md-12 input-group">
         <div class="col-md-3">
-            <input type="submit" (click)="refreshPokemons" class="btn btn-primary" value="All Pokemons">
+            <input type="submit" (click)="getAllPokemons()" class="btn btn-primary" value="All Pokemons">
         </div>
         <div class="col-md-3">
             <div class="col-md-10">
@@ -21,6 +21,9 @@
            <input type="submit" (click)="searchPokemon(pokemonName)" class="btn btn-primary" value="Search">
         </div>
     </div>
+    <div class="col-md-3" *ngIf="this.pokemonService.pokemons.length==0">
+    <p style="color: red;">*No Results Found</p>
+    </div>
     </div>
 </div>
 <!-- Pokemon Grid-->
@@ -36,10 +39,10 @@
             <b>Height: </b>{{pokemon.height}}
         </p>
         <p>
-            <b>Health: </b>{{pokemon.stats[0].health}}
+            <b>Attack Power: </b>{{pokemon.stats[0].attackPower}}
         </p>
         <p>
-            <b>Attack Power: </b>{{pokemon.stats[0].attackPower}}
+            <b><input type="button" class="btn btn-primary" (click)="pokemonDetails(pokemon.name)" value="Details"></b>
         </p>
     </div>
 </div>

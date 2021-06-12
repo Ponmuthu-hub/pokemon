@@ -1,3 +1,4 @@
+import { Move } from "./move";
 import { Sprite } from "./sprite";
 import { Stat } from "./stats";
 import { Type } from "./type";
@@ -9,4 +10,6 @@ export class Pokemon {
     types:Type[]=[];
     stats:Stat[]=[];
     sprites:Sprite[]=[];
+    moves:Move[]=[];
+    weight:number=0;
 }

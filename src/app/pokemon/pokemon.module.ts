@@ -5,12 +5,14 @@ import { PokemonService } from './pokemon.service';
 import { PokemonRoutingModule } from './pokemon-routing.module';
 import { PaginationModule } from '../pagination/pagination.module';
 import { FormsModule } from '@angular/forms';
+import { DetailPokemonComponent } from './detail-pokemon/detail-pokemon.component';
 
 
 
 @NgModule({
   declarations: [
-    ShowPokemonsComponent
+    ShowPokemonsComponent,
+    DetailPokemonComponent
   ],
   imports: [
     CommonModule,

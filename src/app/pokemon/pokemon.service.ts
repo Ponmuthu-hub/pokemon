@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Move } from '../models/move';
 import { Pokemon } from '../models/pokemon';
 import { Sprite } from '../models/sprite';
 import { Stat } from '../models/stats';
@@ -13,6 +14,7 @@ types:Type[]=[];
 stat:Stat=<Stat>{};
 stats:Stat[]=[];
 sprit:Sprite=<Sprite>{};
+move:Move=<Move>{};
   constructor(private sharedService:SharedService) { }
 
   getAllPokemons(pageSize:number,offSet:number){

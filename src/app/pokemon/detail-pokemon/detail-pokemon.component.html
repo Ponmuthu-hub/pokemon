@@ -1,0 +1,54 @@
+<nav>
+    <h1>Pokedex Pokemons</h1>
+</nav>
+
+<div class="details">
+    <div class="row col-md-12">
+    <div class="col-md-6">
+        <input type="button" class="btn btn-primary" (click)="AllPokemons()" value="Back">
+    </div >
+    <div class="col-md-6" ><input type="button" style="float:right;" class="btn btn-danger" (click)="AllPokemons()" value="Close"></div>
+</div>
+    <div class="row col-md-12">
+    <div class="col-md-6">
+     <div class="img"> <img [src]="pokemonService.pokemon.sprites[0].frontImage" alt="Pokemon"></div>  
+    <div  class="svg-img"><img [src]="pokemonService.pokemon.sprites[0].svgImage" alt="Pokemon"></div>
+</div>
+<div class="box col-md-3">
+    <div style="padding-top:50px;"><h1 style="color:red;"><b> {{pokemonService.pokemon.name}}</b></h1>
+        <p>
+            <b>Type: </b>{{pokemonService.pokemon.types[0].name}}
+        </p>
+        <p>
+            <b>Height: </b>{{pokemonService.pokemon.height}}
+        </p>
+        <p>
+            <b>Health: </b>{{pokemonService.pokemon.stats[0].health}}
+        </p>
+        <p>
+            <b>Attack Power: </b>{{pokemonService.pokemon.stats[0].attackPower}}
+        </p>
+      
+        <p>
+            <b>Weight: </b>{{pokemonService.pokemon.weight}}
+        </p></div>
+    </div>
+    <div class="box col-md-3">
+        
+           <h1> <b>Moves</b> </h1>
+        
+        <b>
+            {{pokemonService.pokemon.moves[0].name}}
+        </b>
+        <b>{{pokemonService.pokemon.moves[1].name}}</b>
+        <b>{{pokemonService.pokemon.moves[2].name}}</b>
+        <b>{{pokemonService.pokemon.moves[3].name}}</b>
+        <b>{{pokemonService.pokemon.moves[4].name}}</b>
+    </div>
+
+
+</div>
+
+
+
+

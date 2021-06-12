@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Pokemon } from 'src/app/models/pokemon';
 import { PaginationComponent } from 'src/app/pagination/pagination.component';
 import { PokemonService } from '../pokemon.service';
@@ -17,7 +19,8 @@ export class ShowPokemonsComponent implements OnInit {
   pokemonNames:any[]=[];
   pokemonTypeName:any;
   pokemonName:any;
-  constructor(public pokemonService: PokemonService, private paginationComponent: PaginationComponent) { }
+  records:boolean=true;
+  constructor(public pokemonService: PokemonService, private paginationComponent: PaginationComponent,private localStorageService:LocalStorageService,private router:Router) { }
 
   ngOnInit(): void {
     this.refreshPokemons();
@@ -89,6 +92,10 @@ else{
   this.refreshPokemons();
 }
   }
+  pokemonDetails(name:string){
+this.localStorageService.store('pokemonName',name)
+this.router.navigateByUrl('Pokemons/Details')
+  }
  
   goToPrevious() {
     this.page--;
@@ -97,7 +104,6 @@ else{
   goToNext() {
     this.page++;
     this.refreshPokemons();
-
   }
 
   goToPage(pageNumber: number) {
