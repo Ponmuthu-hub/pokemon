@@ -33,7 +33,6 @@ export class AuthheaderInterceptor implements HttpInterceptor{
             }),
             catchError((error: HttpErrorResponse) => {
               
-
                 let data = {};
                 data = {
                     reason: error && error.error && error.error.reason ? error.error.reason : '',

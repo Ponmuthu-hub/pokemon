@@ -11,6 +11,7 @@ import { AuthheaderInterceptor } from './http-interceptors';
 import { PaginationModule } from './pagination/pagination.module';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { SharedService } from './shared.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SharedService } from './shared.service';
     NgxWebstorageModule.forRoot(),
     PokemonModule,
     HttpClientModule,
-    PaginationModule
+    PaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [NgxWebstorageModule,ErrorResponseService,SharedService,{provide:HTTP_INTERCEPTORS,useClass:AuthheaderInterceptor,multi:true}],
   bootstrap: [AppComponent]
